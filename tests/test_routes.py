@@ -93,3 +93,13 @@ def test_missing_data_add_fish_type(client):
     assert 'error' in data
     assert data['error'] == 'Fish type and food amount are required'
     
+def test_add_duplicate_fish_type(client):
+    new_fish_type = {
+        'fish_type': 'Goldfish',
+        'food_required': 0.1
+    }
+    response = client.post('/add_fish_type', json=new_fish_type)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type Goldfish already exists.'
