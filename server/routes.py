@@ -5,16 +5,30 @@ from fish_tank.tank import FishTank
 
 tank = FishTank()
 
-@app.route('/get_fish_types', methods=['GET'])
-def get_fish_types():
+
+@app.route('/tank', methods=['GET'])
+def current_tank():
     """
-    Retrieves a list of available fish types in the fish tankin response to GET requests.
+    Provides information about the current state of the fish tank.
+
+    This function responds to GET requests on the '/tank' endpoint and returns a JSON object containing the following information:
+
+    * `fish_types` (list[str]): A list of all available fish types in the tank.
+    * `fish_list` (list[dict]): A list of dictionaries representing the fish currently in the tank. (e.g., name, food_required).
+    * `days_until_cleaning` (int): The estimated days until the tank needs cleaning based on the current number of fish.
+    * `total_food_required` (float): The total daily food requirement for all fish in the tank.
 
     Returns:
-        JSON: A list containing all the currently available fish types in the tank.
+        JSON: A dictionary containing information about the current tank state.
     """
     fish_types = list(tank.fish_types.keys())
-    return jsonify(fish_types)
+    fish_list = list(tank.fish_list)
+    days_until_cleaning = tank.days_until_cleaning()
+    total_food_required = tank.food_required()
+    return jsonify({'fish_types': fish_types,
+                    'fish_list': fish_list,
+                    'days_until_cleaning': days_until_cleaning,
+                    'total_food_required': total_food_required})    
 
 
 @app.route('/add_fish', methods=['POST'])
