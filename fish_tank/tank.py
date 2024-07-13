@@ -45,12 +45,12 @@ class FishTank:
             raise ValueError(f'Fish type {fish_type} already exists.')
         
         class NewFish(Fish):
-            def __init__(self):
-                self.name = fish_type
+            def __init__(self, name: str):
+                self.name = name
                 
             def food_required(self) -> float:
                 return food_required
-    
+                
         self.fish_types[fish_type] = NewFish
     
     
