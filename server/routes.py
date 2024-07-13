@@ -7,6 +7,23 @@ tank = FishTank()
 
 @app.route('/add_fish', methods=['POST'])
 def add_fish():
+    """
+    Adds a new fish to the fish tank based on data received in a JSON POST request.
+
+    This function expects a JSON request body containing the following keys:
+
+    * `fish_type` (str): The type of fish to be added.
+    * `fish_name` (str): The desired name for the fish.
+
+    Returns:
+        JSON: A dictionary containing a message on success or an error message on failure. 
+        The response also includes the following information on success:
+            * `total_food_required` (float): The total daily food requirement for all fish in the tank after adding the new fish.
+            * `days_until_cleaning` (int): The estimated days until the tank needs cleaning after adding the new fish.
+
+    Raises:
+        400 Bad Request: If the request data is missing required fields (`fish_type` or `fish_name`) or if the specified fish type is not found in the tank's fish_types dictionary.
+    """
     data = request.json
     fish_type = data['fish_type']
     fish_name = data['fish_name']
