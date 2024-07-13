@@ -99,3 +99,16 @@ The application maintains a single ```FishTank``` object (```tank```) to represe
     * ```message``` (str): A success message upon adding the new fish type.
 * Error Handling:
     * Returns a 400 Bad Request error with a message if required data (```fish_type``` or ```food_required```) is missing, or if adding the fish type results in a ```ValueError``` (e.g., attempting to add a duplicate fish type).
+
+**Testing the API**:
+
+The API includes unit tests written in pytest to ensure the code behaves as expected. To run these tests, you'll need to have pytest installed.
+
+* ```test_current_tank```: Verifies that the ```/tank``` endpoint returns the expected response with initial fish tank data.
+* ```test_add_fish```: Tests adding a new fish and checks the response and updated tank state.
+* ```test_tank_after_adding_fish```: Confirms that the fish details are reflected after adding a fish.
+* ```test_add_fish_type```: Tests adding a new fish type and verifies the success message.
+* ```test_missing_data_add_fish```: Ensures appropriate error handling for missing data in the ```/add_fish``` request.
+* ```test_missing_data_add_fish_type```: Checks for error handling when required data is missing in the ```/add_fish_type``` request.
+* ```test_add_duplicate_fish_type```: Verifies that adding a duplicate fish type results in an error.
+* ```test_add_non_existent_fish_type```: Tests adding a fish with a non-existent fish type and checks the error response.
