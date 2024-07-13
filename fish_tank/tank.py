@@ -29,3 +29,9 @@ class FishTank:
         
     def food_required(self) -> float:
         return sum(fish.food_required() for fish in self.fish_list)
+    
+    def days_until_cleaning(self) -> int:
+        return self.days_until_cleaning
+    
+    def reset_days_until_cleaning(self) -> int:
+        self.days_until_cleaning = 30 - len(self.fish_list)
