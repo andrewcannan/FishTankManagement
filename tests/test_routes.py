@@ -16,3 +16,31 @@ def test_current_tank(client):
     assert 'fish_list' in data
     assert 'days_until_cleaning' in data
     assert 'total_food_required' in data
+    assert data['fish_list'] == []
+    assert data['fish_types'] == ['Goldfish', 'Angelfish', 'Babelfish']
+    assert data['days_until_cleaning'] == 30
+    assert data['total_food_required'] == 0.0
+    
+def test_add_fish(client):
+    new_fish_data = {
+        'fish_type': 'Goldfish',
+        'fish_name': 'Goldie'
+    }
+    response = client.post('/add_fish', json=new_fish_data)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['message'] == 'Fish added successfully.'
+    assert data['total_food_required'] == 0.1
+    assert data['days_until_cleaning'] == 29
+
+def test_tank_after_adding_fish(client):
+    response = client.get('/tank')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['fish_list'][0]['name'] == 'Goldie'
+    assert data['fish_list'][0]['food_required'] == 0.1
+    assert data['fish_types'] == ['Goldfish', 'Angelfish', 'Babelfish']
+    assert data['days_until_cleaning'] == 29
+    assert data['total_food_required'] == 0.1
+    
+    
