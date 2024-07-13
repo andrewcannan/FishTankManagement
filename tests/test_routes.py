@@ -103,3 +103,14 @@ def test_add_duplicate_fish_type(client):
     data = response.get_json()
     assert 'error' in data
     assert data['error'] == 'Fish type Goldfish already exists.'
+    
+def test_add_non_existent_fish_type(client):
+    new_fish_data = {
+        'fish_type': 'Blowfish',
+        'fish_name': 'Blowie'
+    }
+    response = client.post('/add_fish', json=new_fish_data)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type not found.'
