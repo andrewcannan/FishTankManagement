@@ -66,3 +66,35 @@ def add_fish():
     return jsonify({'message': 'Fish added successfully.',
                     'total_food_required': tank.food_required(),
                     'days_until_cleaning': tank.days_until_cleaning()}), 200
+    
+    
+@app.route('/add_fish_type', methods=['POST'])
+def add_fish_type():
+    """
+    Adds a new fish type to the fish tank based on data received in a JSON POST request.
+
+    This function expects a JSON request body containing the following keys:
+
+    * `fish_type` (str): The name of the new fish type to be added.
+    * `food_required` (float): The daily food requirement for this fish type.
+
+    Returns:
+        JSON: A dictionary containing a message on success or an error message on failure.
+
+    Raises:
+        400 Bad Request: If the request data is missing required fields (`fish_type` or `food_required`) or if adding the fish type results in a `ValueError` (e.g., attempting to add a duplicate fish type).
+
+    """
+    data = request.json
+    fish_type = data['fish_type']
+    food_required = data['food_required']
+    
+    if not fish_type or not food_required:
+            return jsonify({"error": "Fish type and food amount are required"}), 400
+    
+    try:
+        tank.add_fish_type(fish_type, food_required)
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    
+    return jsonify({'message': f'New fish type {fish_type} added successfully.'}), 200
