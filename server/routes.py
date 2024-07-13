@@ -5,6 +5,18 @@ from fish_tank.tank import FishTank
 
 tank = FishTank()
 
+@app.route('/get_fish_types', methods=['GET'])
+def get_fish_types():
+    """
+    Retrieves a list of available fish types in the fish tankin response to GET requests.
+
+    Returns:
+        JSON: A list containing all the currently available fish types in the tank.
+    """
+    fish_types = list(tank.fish_types.keys())
+    return jsonify(fish_types)
+
+
 @app.route('/add_fish', methods=['POST'])
 def add_fish():
     """
