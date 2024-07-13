@@ -62,7 +62,7 @@ def test_missing_data_add_fish(client):
     assert response.status_code == 400
     data = response.get_json()
     assert 'error' in data
-    assert data['error'] == 'Fish type and name are required'
+    assert data['error'] == 'Fish type and name are required.'
     new_fish_data_2 = {
         'fish_type': 'Goldfish',
         'fish_name': ''
@@ -71,7 +71,7 @@ def test_missing_data_add_fish(client):
     assert response.status_code == 400
     data = response.get_json()
     assert 'error' in data
-    assert data['error'] == 'Fish type and name are required'
+    assert data['error'] == 'Fish type and name are required.'
     
 def test_missing_data_add_fish_type(client):
     new_fish_type = {
@@ -82,7 +82,7 @@ def test_missing_data_add_fish_type(client):
     assert response.status_code == 400
     data = response.get_json()
     assert 'error' in data
-    assert data['error'] == 'Fish type and food amount are required'
+    assert data['error'] == 'Fish type and food amount are required.'
     new_fish_type_2 = {
         'fish_type': '',
         'food_required': 0.4
@@ -91,7 +91,7 @@ def test_missing_data_add_fish_type(client):
     assert response.status_code == 400
     data = response.get_json()
     assert 'error' in data
-    assert data['error'] == 'Fish type and food amount are required'
+    assert data['error'] == 'Fish type and food amount are required.'
     
 def test_add_duplicate_fish_type(client):
     new_fish_type = {

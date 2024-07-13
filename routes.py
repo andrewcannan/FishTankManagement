@@ -57,7 +57,7 @@ def add_fish():
     fish_name = data['fish_name']
     
     if not fish_type or not fish_name:
-            return jsonify({"error": "Fish type and name are required"}), 400
+            return jsonify({"error": "Fish type and name are required."}), 400
     
     fish_class = tank.fish_types.get(fish_type)
     if not fish_class:
@@ -92,7 +92,7 @@ def add_fish_type():
     food_required = data['food_required']
     
     if not fish_type or not food_required:
-            return jsonify({"error": "Fish type and food amount are required"}), 400
+            return jsonify({"error": "Fish type and food amount are required."}), 400
     
     try:
         tank.add_fish_type(fish_type, food_required)
