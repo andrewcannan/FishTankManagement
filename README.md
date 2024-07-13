@@ -29,3 +29,19 @@ Usage:
     * Use the ```food_required``` method to determine the total daily food amount for all fish in the tank.
     * Call the ```days_until_cleaning``` method to check the estimated days remaining before cleaning is needed.
     * Use the ```reset_days_until_cleaning``` method to manually reset the cleaning estimate if necessary.
+<br>
+
+Testing:
+
+The ```fish_tank``` library includes unit tests written in pytest to ensure the code behaves as expected. To run these tests, you'll need to have pytest installed.
+
+The provided tests cover various aspects of the ```FishTank``` class and fish types:
+
+* ```test_initial_tank```: Verifies the initial state of a new ```FishTank``` object.
+* ```test_add_fish```: Checks the behavior of adding a single fish to the tank.
+* ```test_add_multiple_fish```: Tests adding multiple fish and calculating total food requirements.
+* ```test_add_fish_type```: Ensures that new fish types can be added.
+* ```test_add_duplicate_fish_type```: Confirms that adding a duplicate fish type raises an error.
+* ```test_add_fish_of_new_type```: Tests adding a fish of a newly defined fish type.
+* ```test_sum_of_food_required```: Verifies that the total food requirement reflects the food needs of all fish.
+* ```test_days_until_cleaning```: Tests how adding and removing fish affects the estimated cleaning days and demonstrates the ```reset_days_until_cleaning``` method.
