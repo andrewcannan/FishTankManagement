@@ -35,7 +35,7 @@ class Goldfish(Fish):
 
   
 class Angelfish(Fish):
-     """
+    """
     A specific type of fish known as an Angelfish.
 
     Inherits from the Fish base class and implements the `food_required`
