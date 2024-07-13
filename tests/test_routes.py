@@ -43,4 +43,32 @@ def test_tank_after_adding_fish(client):
     assert data['days_until_cleaning'] == 29
     assert data['total_food_required'] == 0.1
     
+def test_add_fish_type(client):
+    new_fish_type = {
+        'fish_type': 'Clownfish',
+        'food_required': 0.4
+    }
+    response = client.post('/add_fish_type', json=new_fish_type)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['message'] == 'New fish type Clownfish added successfully.'
     
+def test_missing_data_add_fish(client):
+    new_fish_data = {
+        'fish_type': 'Goldfish',
+        'fish_name': ''
+    }
+    response = client.post('/add_fish', json=new_fish_data)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type and name are required'
+    new_fish_data_2 = {
+        'fish_type': 'Goldfish',
+        'fish_name': ''
+    }
+    response = client.post('/add_fish', json=new_fish_data_2)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type and name are required'
