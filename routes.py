@@ -61,7 +61,7 @@ def add_fish():
     tank.add_fish(fish)
     return jsonify({'message': 'Fish added successfully.',
                     'total_food_required': tank.food_required(),
-                    'days_until_cleaning': tank.days_until_cleaning()}), 200
+                    'days_until_cleaning': tank.days_until_cleaning}), 200
     
     
 @app.route('/add_fish_type', methods=['POST'])
