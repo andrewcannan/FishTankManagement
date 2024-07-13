@@ -1,9 +1,5 @@
 from flask import request, jsonify
-from app import app
-from fish_tank.tank import FishTank
-
-
-tank = FishTank()
+from app import app, tank
 
 
 @app.route('/tank', methods=['GET'])
