@@ -9,3 +9,7 @@ class FishTank:
             'Angelfish': Angelfish,
             'Babelfish': Babelfish
         }
+        
+    def add_fish(self, fish: Fish):
+        self.fish_list.append(Fish)
+        self.days_until_cleaning -= 1
