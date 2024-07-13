@@ -18,7 +18,13 @@ def current_tank():
         JSON: A dictionary containing information about the current tank state.
     """
     fish_types = list(tank.fish_types.keys())
-    fish_list = list(tank.fish_list)
+    fish_list = []
+    for fish in tank.fish_list:
+        fish_dict = {
+            'name': fish.name,
+            'food_required': fish.food_required()
+        }
+        fish_list.append(fish_dict)
     days_until_cleaning = tank.days_until_cleaning
     total_food_required = tank.food_required()
     return jsonify({'fish_types': fish_types,
