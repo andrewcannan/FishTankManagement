@@ -54,7 +54,7 @@ This section describes the API endpoints available for interacting with the Fish
 
 **Flask Dependencies**:
 
-The Fish Tank application utilizes Flask, a lightweight web framework for Python. Server can be initalised by changing into the server directory and running the command ```flask run``` (so long as flask and python is installed).
+The Fish Tank application utilizes Flask, a lightweight web framework for Python. Server can be initalised by changing into the root directory and running the command ```flask run``` (so long as flask and python is installed).
 
 **Global Fish Tank Instance**:
 
