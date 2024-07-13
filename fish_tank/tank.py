@@ -11,5 +11,5 @@ class FishTank:
         }
         
     def add_fish(self, fish: Fish):
-        self.fish_list.append(Fish)
+        self.fish_list.append(fish)
         self.days_until_cleaning -= 1
