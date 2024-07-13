@@ -68,7 +68,7 @@ The application maintains a single ```FishTank``` object (```tank```) to represe
 * Method: GET
 * Response: JSON object containing:
     * ```fish_types``` (list[str]): A list of all available fish types in the tank.
-    * ```fish_list``` (list[dict]): A list of dictionaries representing the fish currently in the tank. Each dictionary may contain details about the fish depending on your implementation (e.g., name, type).
+    * ```fish_list``` (list[dict]): A list of dictionaries representing the fish currently in the tank.
     * ```days_until_cleaning``` (int): The estimated days until the tank needs cleaning based on the current number of fish.
     * t```otal_food_required``` (float): The total daily food requirement for all fish in the tank.
 <br><br>
