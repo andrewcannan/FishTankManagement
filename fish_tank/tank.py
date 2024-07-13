@@ -26,3 +26,6 @@ class FishTank:
                 return food_required
     
         self.fish_types[fish_type] = NewFish
+        
+    def food_required(self) -> float:
+        return sum(fish.food_required() for fish in self.fish_list)
