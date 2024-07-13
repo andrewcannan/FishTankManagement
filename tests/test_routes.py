@@ -72,3 +72,24 @@ def test_missing_data_add_fish(client):
     data = response.get_json()
     assert 'error' in data
     assert data['error'] == 'Fish type and name are required'
+    
+def test_missing_data_add_fish_type(client):
+    new_fish_type = {
+        'fish_type': 'Clownfish',
+        'food_required': ''
+    }
+    response = client.post('/add_fish_type', json=new_fish_type)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type and food amount are required'
+    new_fish_type_2 = {
+        'fish_type': '',
+        'food_required': 0.4
+    }
+    response = client.post('/add_fish_type', json=new_fish_type_2)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type and food amount are required'
+    
