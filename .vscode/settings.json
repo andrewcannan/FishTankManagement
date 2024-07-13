@@ -1,6 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        "fish_tank"
+        "tests"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
