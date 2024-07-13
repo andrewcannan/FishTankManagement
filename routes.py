@@ -19,7 +19,7 @@ def current_tank():
     """
     fish_types = list(tank.fish_types.keys())
     fish_list = list(tank.fish_list)
-    days_until_cleaning = tank.days_until_cleaning()
+    days_until_cleaning = tank.days_until_cleaning
     total_food_required = tank.food_required()
     return jsonify({'fish_types': fish_types,
                     'fish_list': fish_list,
