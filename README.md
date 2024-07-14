@@ -1,9 +1,74 @@
 # Fish Tank Management
 <br>
 
+* [Brief](#brief)
+* [Design Overview](#design-overview)
 * [Fish Tank Library](#fish-tank-library)
 * [Fish Tank API](#fish-tank-api)
 <br>
+
+## Brief
+
+In a language of your choosing:
+
+I need a new system to help me manage my fish tank. Don’t worry about the UI: I will build that.
+<br>
+
+The library should satisfy the following user stories and demonstrate your design, coding and
+testing abilities.
+<br>
+ 
+Here are the user stories:
+
+1. A user should be able to add 3 types of fish to the tank (Goldfish, Angel fish, Babel
+fish) and name the fish.
+2. The amount of food required for each fish is as follows:
+    * a. 0.1g for each Goldfish
+    * b. 0.2g for each Angel fish
+    * c. 0.3g for each Babel fish
+3. A user should be able to see how much food is needed to feed the fish in the tank.
+4. Every 30 days the tank needs cleaning but each time a fish is added the number of
+days is reduced by 1. As a user I should be able to see the number of days until
+cleaning is required.
+
+Ensure the design allows me to add more types of fish in the future without having to change
+the code.
+
+## Design Overview
+
+**Design Decisions**:
+
+* Using a Python package provides a reusable library for managing the fish tank.
+* Separating fish types and tank logic offers modularity and easier expansion.
+* The abstract Fish class promotes code maintainability for future fish types.
+
+**User Stories**:
+
+* Adding Fish: The ``FishTank.add_fish`` method allows adding various fish types (```Goldfish```, ```Angelfish```, ```Babelfish```) with custom names by creating instances of the corresponding classes.
+* Food Requirements: Specific fish classes (```Goldfish```, ```Angelfish```, ```Babelfish```) implement the ```food_required``` method to return their daily food amount. The ```FishTank.food_required``` method calculates the total food needed for all fish.
+* Cleaning Schedule: The ```days_until_cleaning``` attribute tracks the estimated days before cleaning. Adding fish reduces this value by 1.
+
+New fish types can be added by creating classes inheriting from ```Fish``` and implementing ```food_required``` without modifying existing code. The ```fish_types``` dictionary in ```FishTank``` automatically incorporates them.
+
+**Future Implementations**:
+
+* Tracking Cleaning Schedule: The current last_updated attribute and update_days_until_cleaning method offer the ability to implement a scheduled update of tank_status for the user, so long as the session persists.
+* Reset Cleaning Schedule : The current reset_days_until_cleaning methods offers the ability for the user to update the tank_status after a clean has been performed.
+
+Endpoints for each would need to be created.
+
+**Alternative Approach**:
+
+While the provided Python library offers a solid solution, an alternative approach could utilize a relational database and a web API for managing the fish tank.
+
+This method involves creating three tables:
+
+* ```fish``` to store individual fish information
+* ```fish_type``` to define various fish species and their daily food requirements
+* ```tank_status``` to track the estimated days until cleaning.
+* Initial ```fish_types``` and ```tank_status``` could be defined as defult values.
+
+ A similar web API would interact with this database, enabling CRUD functionalities like adding new fish, retrieving information about existing fish, calculating total daily food requirements, updating the cleaning schedule as fish are added, and monitoring the current status of the tank. The benefit to this approach would be the persistence of data between sessions, but as a library was mentioned in the brief I created a standalone python package/library and a RESTful API that utilizes it.
 
 ## Fish Tank Library
 
