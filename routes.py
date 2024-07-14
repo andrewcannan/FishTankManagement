@@ -75,12 +75,15 @@ def add_fish_type():
         400 Bad Request: If the request data is missing required fields (`fish_type` or `food_required`) or if adding the fish type results in a `ValueError` (e.g., attempting to add a duplicate fish type).
 
     """
-    data = request.json
-    fish_type = data['fish_type']
-    food_required = data['food_required']
-    
-    if not fish_type or not food_required:
-            return jsonify({"error": "Fish type and food amount are required."}), 400
+    try:
+        data = request.json
+        fish_type = data['fish_type']
+        food_required = float(data['food_required'])
+    except KeyError:
+        return jsonify({"error": "Fish type and food amount are required."}), 400
+    except ValueError:
+        return jsonify({"error": "Food amount must be a valid number. E.g - 0.1"}), 400
+        
     
     try:
         tank.add_fish_type(fish_type, food_required)
