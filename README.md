@@ -153,10 +153,14 @@ The application maintains a single ```FishTank``` object (```tank```) to represe
     * ```fish_name``` (str): The desired name for the fish.
 * Response: JSON object containing:
     * ```message``` (str): A success message upon adding the fish.
-    * ```total_food_required``` (float): The total daily food requirement for all fish in the tank after adding the new fish.
-    * ```days_until_cleaning``` (int): The estimated days until the tank needs cleaning after adding the new fish.
+    * ```tank_status```(obj): A JSON object containing:
+        * fish_types (list[str]): A list of all available fish types in the tank.
+        * fish_list (list[dict]): A list of dictionaries representing the fish currently in the tank.
+        * days_until_cleaning (int): The estimated days until the tank needs cleaning based on the current number of fish.
+        * total_food_required (float): The total daily food requirement for all fish in the tank.
+
 * Error Handling:
-    * Returns a 400 Bad Request error with a message if required data (```fish_type``` or ```fish_name```) is missing, or if the specified fish type is not found.
+    * Returns a 400 Bad Request error with a message if required data (```fish_type``` or ```fish_name```) is missing, has empty values or if the specified fish type is not found.
 <br><br>
 
 3. POST ```/add_fish_type```
@@ -169,7 +173,7 @@ The application maintains a single ```FishTank``` object (```tank```) to represe
 * Response: JSON object containing:
     * ```message``` (str): A success message upon adding the new fish type.
 * Error Handling:
-    * Returns a 400 Bad Request error with a message if required data (```fish_type``` or ```food_required```) is missing, or if adding the fish type results in a ```ValueError``` (e.g., attempting to add a duplicate fish type).
+    * Returns a 400 Bad Request error with a message if required data (```fish_type``` or ```food_required```) is missing, has empty vaues or if adding the fish type results in a ```ValueError``` (e.g., attempting to add a duplicate fish type).
 
 **Testing the API**:
 
@@ -180,6 +184,9 @@ The API includes unit tests written in pytest to ensure the code behaves as expe
 * ```test_tank_after_adding_fish```: Confirms that the fish details are reflected after adding a fish.
 * ```test_add_fish_type```: Tests adding a new fish type and verifies the success message.
 * ```test_missing_data_add_fish```: Ensures appropriate error handling for missing data in the ```/add_fish``` request.
+* ```test_empty_string_add_fish```: Checks error handling for empty fish type/name.
 * ```test_missing_data_add_fish_type```: Checks for error handling when required data is missing in the ```/add_fish_type``` request.
+* ```test_empty_string_add_fish_type```: Checks error handling for empty fish type when adding fish type.
+* ```test_non_number_add_fish_type```: Ensures rejection of non-numeric food amount for fish type.
 * ```test_add_duplicate_fish_type```: Verifies that adding a duplicate fish type results in an error.
 * ```test_add_non_existent_fish_type```: Tests adding a fish with a non-existent fish type and checks the error response.
