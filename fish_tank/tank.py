@@ -93,7 +93,7 @@ class FishTank:
         The returned dictionary contains the following information:
 
         * `fish_types`: A list of all the unique fish types currently in the tank (keys from the `fish_types` dictionary).
-        * `fish_list`: A list of dictionaries representing each fish in the tank. Each dictionary is the result of calling the `to_dict` method on the corresponding fish object.
+        * `fish_list`: A list of dictionaries representing each fish in the tank.
         * `days_until_cleaning`: An integer representing the number of days remaining until cleaning is required (based on the `days_until_cleaning` attribute).
         * `total_food_required`: An float representing the total amount of food required for all fish in the tank (presumably calculated by the `food_required` method).
 
