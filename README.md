@@ -9,15 +9,19 @@
 
 This library provides a Python class (FishTank) to simulate a virtual fish tank and manage its inhabitants. It allows you to:
 
-* Add Fish: You can introduce various fish species by creating instances of their corresponding fish classes (e.g., ```Goldfish```, ```Angelfish```) in ```fish.py``` or dynamically adding new fish types using the ```add_fish_type``` method.
+**Fish Management**:
+
+* Add Fish: You can introduce various fish species by creating instances of their corresponding fish classes (e.g., ```Goldfish```, ```Angelfish```) in fish.py or dynamically adding new fish types using the ```add_fish_type``` method.
+* Control Over Fish Types:
+    * Abstract Fish Class: The Fish class serves as an abstract base class, defining a common interface (```name``` attribute and ```food_required``` abstract method) for all fish types. Specific fish classes (e.g., ```Goldfish```, ```Angelfish```) inherit from ```Fish``` and provide concrete implementations for ```food_required```.
+    * Dynamic Fish Type Addition: The ```add_fish_type``` method enables you to introduce new fish types during runtime by specifying the fish type name and its daily food requirement.
+
+**Monitoring and Maintenance**:
+
 * Track Food Requirements: The ```food_required``` method calculates the total amount of food needed daily for all fish in the tank.
-* Manage Cleaning Schedule: The ```days_until_cleaning``` method estimates the remaining days before the tank requires cleaning based on the number of fish (initially set to 30 days). The ```reset_days_until_cleaning``` method allows you to manually reset this estimate.
-
-**Control over Fish types**:
-
-* Abstract Fish Class: The Fish class serves as an abstract base class, defining a common interface (```name``` attribute and ```food_required``` abstract method) for all fish types. An abstract class cannot be instantiated directly and abstract methods must be implemented by any subclass. Specific fish classes (e.g., ```Goldfish```, ```Angelfish```) inherit from Fish and provide concrete implementations for ```food_required```.
-* Dynamic Fish Type Addition: The ```add_fish_type method``` enables you to introduce new fish types during runtime by specifying the fish type name and its daily food requirement.
-
+* Manage Cleaning Schedule: 
+    * The ```days_until_cleaning``` attribute displays the remaining days before the tank requires cleaning based on the number of fish (initially set to 30 days). The ```reset_days_until_cleaning``` method allows you to manually reset this estimate.
+    * The ```update_days_until_cleaning``` method automatically updates the ```days_until_cleaning``` attribute based on the time elapsed since the last update. It calculates the number of days that have passed and subtracts that value from ```days_until_cleaning``` if necessary. It also updates the ```last_updated``` attribute to the current time.
 
 **Usage**:
 
@@ -28,8 +32,9 @@ This library provides a Python class (FishTank) to simulate a virtual fish tank 
     * Call the ```add_fish``` method on the ```FishTank``` object, passing the fish object as an argument.
 * Manage Food and Cleaning:
     * Use the ```food_required``` method to determine the total daily food amount for all fish in the tank.
-    * Call the ```days_until_cleaning``` method to check the estimated days remaining before cleaning is needed.
+    * Query the ```days_until_cleaning``` attribute to check the days remaining before cleaning is needed.
     * Use the ```reset_days_until_cleaning``` method to manually reset the cleaning estimate if necessary.
+    * Utilize the ```get_tank_status``` method to retrieve a comprehensive overview of the tank's current state.
 <br>
 
 **Testing**:
