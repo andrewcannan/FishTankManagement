@@ -66,22 +66,13 @@ class FishTank:
         return sum(fish.food_required() for fish in self.fish_list)
     
     
-    def days_until_cleaning(self) -> int:
-        """
-        Returns the estimated number of days until the tank needs cleaning.
-
-        Returns:
-            int: The estimated days until cleaning based on the number of fish.
-        """
-        return self.days_until_cleaning
-    
-    
     def reset_days_until_cleaning(self) -> int:
         """
         Resets the days_until_cleaning attribute to 30 minus the number of fish in the tank.
         """
         self.days_until_cleaning = 30 - len(self.fish_list)
         
+
     def update_days_until_cleaning(self):
         """
         Updates the 'days_until_cleaning' attribute based on the time elapsed since the last update.
