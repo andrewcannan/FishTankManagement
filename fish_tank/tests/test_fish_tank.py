@@ -14,6 +14,7 @@ def test_initial_tank():
             'Babelfish': Babelfish
         }
     assert tank.food_required() == 0.0
+    assert tank.last_updated == datetime.now()
     
 def test_add_fish():
     tank = FishTank()
@@ -85,7 +86,6 @@ def test_update_days_until_cleaning():
     tank = FishTank()
     initial_days_until_cleaning = tank.days_until_cleaning
     tank.last_updated = (datetime.now() - timedelta(days=5))
-    assert tank.last_updated == (datetime.now() - timedelta(days=5))
     tank.update_days_until_cleaning()
     assert tank.days_until_cleaning == initial_days_until_cleaning - 5
     assert tank.last_updated.date() == datetime.now().date() 
