@@ -17,20 +17,8 @@ def current_tank():
     Returns:
         JSON: A dictionary containing information about the current tank state.
     """
-    fish_types = list(tank.fish_types.keys())
-    fish_list = []
-    for fish in tank.fish_list:
-        fish_dict = {
-            'name': fish.name,
-            'food_required': fish.food_required()
-        }
-        fish_list.append(fish_dict)
-    days_until_cleaning = tank.days_until_cleaning
-    total_food_required = tank.food_required()
-    return jsonify({'fish_types': fish_types,
-                    'fish_list': fish_list,
-                    'days_until_cleaning': days_until_cleaning,
-                    'total_food_required': total_food_required})    
+    tank_status = tank.get_tank_status()
+    return jsonify(tank_status), 200    
 
 
 @app.route('/add_fish', methods=['POST'])
