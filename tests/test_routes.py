@@ -55,14 +55,38 @@ def test_add_fish_type(client):
     
 def test_missing_data_add_fish(client):
     new_fish_data = {
-        'fish_type': 'Goldfish',
-        'fish_name': ''
+        'fish_type': 'Goldfish'
     }
     response = client.post('/add_fish', json=new_fish_data)
     assert response.status_code == 400
     data = response.get_json()
     assert 'error' in data
     assert data['error'] == 'Fish type and name are required.'
+    new_fish_data_2 = {
+        'fish_name': 'Goldie'
+    }
+    response = client.post('/add_fish', json=new_fish_data_2)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type and name are required.'
+    new_fish_data_3 = {}
+    response = client.post('/add_fish', json=new_fish_data_3)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type and name are required.'
+    
+def test_empty_string_add_fish(client):
+    new_fish_data = {
+        'fish_type': '',
+        'fish_name': 'Goldie'
+    }
+    response = client.post('/add_fish', json=new_fish_data)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type and Name must be provided as a non-empty string.'
     new_fish_data_2 = {
         'fish_type': 'Goldfish',
         'fish_name': ''
@@ -71,12 +95,11 @@ def test_missing_data_add_fish(client):
     assert response.status_code == 400
     data = response.get_json()
     assert 'error' in data
-    assert data['error'] == 'Fish type and name are required.'
+    assert data['error'] == 'Fish type and Name must be provided as a non-empty string.'
     
 def test_missing_data_add_fish_type(client):
     new_fish_type = {
-        'fish_type': 'Clownfish',
-        'food_required': ''
+        'fish_type': 'Clownfish'
     }
     response = client.post('/add_fish_type', json=new_fish_type)
     assert response.status_code == 400
@@ -84,7 +107,6 @@ def test_missing_data_add_fish_type(client):
     assert 'error' in data
     assert data['error'] == 'Fish type and food amount are required.'
     new_fish_type_2 = {
-        'fish_type': '',
         'food_required': 0.4
     }
     response = client.post('/add_fish_type', json=new_fish_type_2)
@@ -92,6 +114,28 @@ def test_missing_data_add_fish_type(client):
     data = response.get_json()
     assert 'error' in data
     assert data['error'] == 'Fish type and food amount are required.'
+    
+def test_empty_string_add_fish_type(client):
+    new_fish_type = {
+        'fish_type': '',
+        'food_required': 0.4
+    }
+    response = client.post('/add_fish_type', json=new_fish_type)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Fish type must be provided as a non-empty string.'
+    
+def test_non_number_add_fish_type(client):
+    new_fish_type = {
+        'fish_type': 'Clownfish',
+        'food_required': 'Apple'
+    }
+    response = client.post('/add_fish_type', json=new_fish_type)
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+    assert data['error'] == 'Food amount must be a valid number. E.g - 0.1'
     
 def test_add_duplicate_fish_type(client):
     new_fish_type = {
