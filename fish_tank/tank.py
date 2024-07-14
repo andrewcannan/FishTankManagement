@@ -81,3 +81,13 @@ class FishTank:
         Resets the days_until_cleaning attribute to 30 minus the number of fish in the tank.
         """
         self.days_until_cleaning = 30 - len(self.fish_list)
+        
+    def update_days_until_cleaning(self):
+        """
+        Updates the 'days_until_cleaning' attribute based on the time elapsed since the last update.
+        """
+        now = datetime.now()
+        days_passed = (now - self.last_updated).days
+        if days_passed > 0:
+            self.days_until_cleaning -= days_passed
+            self.last_updated = now
