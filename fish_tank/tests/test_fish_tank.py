@@ -1,6 +1,7 @@
 import pytest
 from fish_tank.fish import Goldfish, Angelfish, Babelfish
 from fish_tank.tank import FishTank
+from datetime import datetime, timedelta
 
 
 def test_initial_tank():
@@ -79,6 +80,16 @@ def test_days_until_cleaning():
     tank.fish_list.pop(1)
     tank.reset_days_until_cleaning()
     assert tank.days_until_cleaning == 29
+    
+def test_update_days_until_cleaning():
+    tank = FishTank()
+    initial_days_until_cleaning = tank.days_until_cleaning
+    tank.last_updated = (datetime.now() - timedelta(days=5))
+    assert tank.last_updated == (datetime.now() - timedelta(days=5))
+    tank.update_days_until_cleaning()
+    assert tank.days_until_cleaning == initial_days_until_cleaning - 5
+    assert tank.last_updated.date() == datetime.now().date() 
 
 if __name__ == '__main__':
     pytest.main()
+    
