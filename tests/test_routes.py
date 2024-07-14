@@ -30,8 +30,8 @@ def test_add_fish(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data['message'] == 'Fish added successfully.'
-    assert data['total_food_required'] == 0.1
-    assert data['days_until_cleaning'] == 29
+    assert data['tank_status']['total_food_required'] == 0.1
+    assert data['tank_status']['days_until_cleaning'] == 29
 
 def test_tank_after_adding_fish(client):
     response = client.get('/tank')
