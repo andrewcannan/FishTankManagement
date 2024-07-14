@@ -42,11 +42,14 @@ def add_fish():
     """
     try:
         data = request.json
-        fish_type = str(data['fish_type'])
-        fish_name = str(data['fish_name'])
+        fish_type = str(data['fish_type']).strip()
+        fish_name = str(data['fish_name']).strip()
     except KeyError:
         return jsonify({"error": "Fish type and name are required."}), 400
     
+    if not fish_type or not fish_name:
+        return jsonify({"error": "Fish type and Name must be provided as a non-empty string."}), 400
+        
     fish_class = tank.fish_types.get(fish_type)
     if not fish_class:
         return jsonify({'error': 'Fish type not found.'}), 400
