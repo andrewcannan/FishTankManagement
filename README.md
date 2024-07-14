@@ -51,6 +51,7 @@ The provided tests cover various aspects of the ```FishTank``` class and fish ty
 * ```test_add_fish_of_new_type```: Tests adding a fish of a newly defined fish type.
 * ```test_sum_of_food_required```: Verifies that the total food requirement reflects the food needs of all fish.
 * ```test_days_until_cleaning```: Tests how adding and removing fish affects the estimated cleaning days and demonstrates the ```reset_days_until_cleaning``` method.
+* ```test_update_days_until_cleaning```: Verifies that the ```update_days_until_cleaning``` method correctly updates the ```days_until_cleaning``` attribute based on the elapsed time since the last update.
 <br>
 
 ## Fish Tank API
