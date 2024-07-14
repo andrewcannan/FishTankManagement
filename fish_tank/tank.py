@@ -1,4 +1,5 @@
 from .fish import Fish, Goldfish, Angelfish, Babelfish
+from datetime import datetime
 
 class FishTank:
     """
@@ -17,6 +18,7 @@ class FishTank:
             'Angelfish': Angelfish,
             'Babelfish': Babelfish
         }
+        self.last_updated = datetime.now()
     
     
     def add_fish(self, fish: Fish):
