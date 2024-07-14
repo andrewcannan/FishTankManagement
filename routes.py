@@ -40,12 +40,12 @@ def add_fish():
     Raises:
         400 Bad Request: If the request data is missing required fields (`fish_type` or `fish_name`) or if the specified fish type is not found in the tank's fish_types dictionary.
     """
-    data = request.json
-    fish_type = data['fish_type']
-    fish_name = data['fish_name']
-    
-    if not fish_type or not fish_name:
-            return jsonify({"error": "Fish type and name are required."}), 400
+    try:
+        data = request.json
+        fish_type = str(data['fish_type'])
+        fish_name = str(data['fish_name'])
+    except KeyError:
+        return jsonify({"error": "Fish type and name are required."}), 400
     
     fish_class = tank.fish_types.get(fish_type)
     if not fish_class:
@@ -77,12 +77,15 @@ def add_fish_type():
     """
     try:
         data = request.json
-        fish_type = data['fish_type']
+        fish_type = str(data['fish_type']).strip()
         food_required = float(data['food_required'])
     except KeyError:
         return jsonify({"error": "Fish type and food amount are required."}), 400
     except ValueError:
         return jsonify({"error": "Food amount must be a valid number. E.g - 0.1"}), 400
+    
+    if not fish_type:
+        return jsonify({"error": "Fish type must be provided as a non-empty string."}), 400
         
     
     try:
